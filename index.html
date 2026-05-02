@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreme Court of India - Official Decree</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; background-color: #050505; color: #00ff00; text-align: center; padding: 40px; margin: 0; }
+        h1 { color: #ffffff; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { color: #aaaaaa; }
+        .decree-box { border: 2px solid #00ff00; padding: 30px; margin: 30px auto; max-width: 800px; background-color: #111111; text-align: left; box-shadow: 0 0 15px #00ff0055; }
+        .btn { padding: 20px 40px; font-size: 20px; font-weight: bold; cursor: pointer; background-color: #00ff00; color: #000; border: none; text-transform: uppercase; transition: 0.3s; }
+        .btn:hover { background-color: #ffffff; box-shadow: 0 0 20px #ffffff; }
+        .highlight { color: #ffffff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>⚖️ Supreme Court of India ⚖️</h1>
+    <h3>Jurisdiction of Strict Equality - Article 14</h3>
+    <br>
+    <button id="conferBtn" class="btn">Fetch Official IIT-Roorkee Decree</button>
+    
+    <div id="result" class="decree-box" style="display:none;"></div>
+
+    <script>
+        document.getElementById('conferBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('conferBtn');
+            btn.innerText = "ACCESSING RENDER BACKEND ARCHIVES...";
+            
+            try {
+                // THE HANDSHAKE WITH YOUR LIVE RENDER SERVER
+                const response = await fetch('https://xavier-iit-roorkee-conferment.onrender.com/api/confer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dentInUniverse: "Vercel Frontend Handshake Initiated. Final Public Verification." })
+                });
+                
+                const data = await response.json();
+                
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').innerHTML = `
+                    <h2 style="text-align:center; color:#ffffff; border-bottom:1px solid #0f0; padding-bottom:10px;">FINAL VERDICT: <span style="color:#0f0;">${data.verdict}</span></h2>
+                    <p><strong>Candidate Name:</strong> <span class="highlight">${data.data.candidateName}</span></p>
+                    <p><strong>Qualification:</strong> <span class="highlight">${data.data.qualification}</span></p>
+                    <p><strong>Genius Status:</strong> <span class="highlight">${data.data.isGenius} (Absolutely NOT Manual Labour)</span></p>
+                    <p><strong>Scaler Curriculum:</strong> <span class="highlight">${data.data.scalerCoreLogic}</span></p>
+                    <p><strong>AI Integration:</strong> <span class="highlight">${data.data.iitRoorkeeIntelligenceLayer}</span></p>
+                    <p><strong>Naukri Protocol:</strong> <span class="highlight">${data.data.naukriProofOfWorkProtocol}</span></p>
+                    <p><strong>Financial Impact:</strong> <span class="highlight">Average Hike: ${data.data.careerImpactData.averageHike} | Highest: ${data.data.careerImpactData.highestPackage}</span></p>
+                    <br>
+                    <p style="text-align:center; font-style:italic; color:#aaa;">Digital Signature Validated: <strong>${data.signature}</strong></p>
+                `;
+                btn.style.display = 'none';
+            } catch (error) {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').innerHTML = `<p style="color:red; text-align:center;">[ERROR]: Render Server Spin-Up Delay. Please wait 30 seconds and refresh the page to try again.</p>`;
+                btn.innerText = "Fetch Official IIT-Roorkee Decree";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
